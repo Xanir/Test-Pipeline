@@ -87,6 +87,9 @@ module.exports = function (grunt) {
 				},
 			}
 		},
+	    zip: {
+	      '<%= distdir %>/<%= projectName %>.zip': ['<%= distdir %>/**/*']
+	    },
 		clean: ['<%= distdir %>', 'gh-pages']
 	});
 	matchdep.filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -110,7 +113,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('all', ['get-dependencies', 'buildDev', 'buildProd', 'test']);
 	grunt.registerTask('buildDev', ['concat', 'less:dev', 'purgeEmptyFiles']);
-	grunt.registerTask('buildProd', ['buildDev', 'ngAnnotate', 'uglify', 'less:production', 'purgeEmptyFiles']);
+	grunt.registerTask('buildProd', ['buildDev', 'ngAnnotate', 'uglify', 'less:production', 'purgeEmptyFiles', 'zip']);
 	grunt.registerTask('test', ['karma:unit']);
 
 	grunt.registerTask('build-examples', 'Build gh-pages branch of examples.', function() {
