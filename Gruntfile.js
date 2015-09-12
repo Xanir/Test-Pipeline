@@ -1,12 +1,19 @@
 module.exports = function (grunt) {
 
 	var matchdep = require('matchdep'); // dependencies from package
-	var repoLocation = /(https:\/\/github.com)(.*)/.exec(grunt.file.read('.git/config'))[0];
+
+	var repoLocation = /\s*?url\s?=\s?(.*)/.exec(grunt.file.read('.git/config'))[0];
 	var srcdir = 'src';
 	var distdir = 'dist';
 
 	// Get name of folder this file is in.
-	var projectName = /[^\\/]*$/gi.exec(__dirname)[0];
+	var getRepoName = function() {
+		var split = repoLocation.split('/');
+		var repoName = split[split.length - 1];
+		return repoName.replace(/\.git$/, '');
+	}
+	var projectName = getRepoName();
+	console.log(projectName);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
