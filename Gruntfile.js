@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
 
 	var matchdep = require('matchdep'); // dependencies from package
-
+// something dumb here
 	var repoLocation = /\s*?url\s?=\s?(.*)/.exec(grunt.file.read('.git/config'))[0];
 	var srcdir = 'src';
 	var distdir = 'dist';
